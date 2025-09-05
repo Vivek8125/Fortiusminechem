@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Fortius Minechem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3a86ff;
+            --secondary-color: #8338ec;
+            --text-color: #333;
+            --bg-color: #fff;
+            --card-bg: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #4cc9f0;
+            --secondary-color: #c45ab4;
+            --text-color: #f8f9fa;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: var(--transition);
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 5%;
+            background-color: rgba(0, 0, 0, 0.4);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .navbar.scrolled {
+            padding: 0.8rem 5%;
+            background-color: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo-container img {
+            height: 50px;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled .logo-container img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            position: relative;
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .navbar.scrolled .nav-links a {
+            color: white;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: white;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .navbar.scrolled .hamburger {
+            color: white;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        .navbar.scrolled .theme-toggle {
+            color: white;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-color);
+            transform: rotate(30deg);
+        }
+
+        /* About Us Section */
+        .about-section {
+            padding: 8rem 5% 5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .section-title.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .about-card {
+            flex: 1 1 320px;
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s, box-shadow 0.3s;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .about-card:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            transform: translateY(-5px);
+        }
+
+        .about-card.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+            line-height: 1.3;
+        }
+
+        .about-card p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .highlight {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .vision-mission {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+            box-shadow: 0 15px 40px rgba(58, 134, 255, 0.2);
+        }
+
+        .vision-mission.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .vision-mission h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .vision-mission ul {
+            padding-left: 20px;
+        }
+
+        .vision-mission li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Founder Section */
+        .founder-section {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin: 4rem 0;
+            flex-wrap: wrap;
+            background-color: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .founder-image {
+            flex: 1 1 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .founder-image.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .founder-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .founder-info {
+            flex: 2 1 500px;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .founder-info.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .founder-info h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .founder-info p {
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 5%;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--bg-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2.5rem;
+                transition: var(--transition);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .founder-section {
+                flex-direction: column;
+            }
+            
+            .founder-image, .founder-info {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="./IMG/logo.png" alt="Fortius Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="product-details.html">Products</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <!-- <li><a href="#gallery">Gallery</a></li> -->
+            <li>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- About Us Section -->
+    <section class="about-section">
+        <h1 class="section-title" id="mainTitle">About <span class="highlight">Fortius Minechem</span></h1>
+        
+        <div class="about-content">
+            <div class="about-card" id="card1">
+                <h3>Building Excellence in Minerals Since <span class="highlight">2011</span></h3>
+                <p>Established in <span class="highlight">2011</span>, <span class="highlight">Fortius Minechem</span> has emerged as a trusted name in the mineral industry, specializing in <span class="highlight">Calcite Powder and Dolomite</span>. With a strong commitment to quality, innovation, and customer satisfaction, we have grown into a leading manufacturer and supplier serving various industries, including <span class="highlight">paints, plastics, ceramics, construction, and agriculture</span>.</p>
+            </div>
+            
+            <div class="about-card" id="card2">
+                <h3>Our Commitment to Quality</h3>
+                <p>At Fortius Minechem, we prioritize <span class="highlight">high-purity minerals</span>, advanced processing techniques, and stringent quality control measures to ensure that our products meet the highest industry standards. Our state-of-the-art manufacturing facility is equipped with modern technology to deliver consistent and premium-grade materials to our clients.</p>
+            </div>
+        </div>
+
+        <div class="founder-section">
+            <div class="founder-image" id="founderImage">
+                <img src="./IMG/logo.png" alt="Bharat Patel - Founder of Fortius Minechem">
+            </div>
+            <div class="founder-info" id="founderInfo">
+                <h2>Founder - <span class="highlight">Bharat Patel</span></h2>
+                <p>Fortius Minechem was founded by <span class="highlight">Bharat Patel</span>, a visionary entrepreneur with a deep understanding of the mineral processing industry. With years of experience and expertise, he played a key role in shaping the company's growth. Before establishing Fortius Minechem, he also served as a <span class="highlight">Director at Deca Microns</span>, further strengthening his legacy in the field of industrial minerals.</p>
+            </div>
+        </div>
+
+        <div class="vision-mission" id="visionMission">
+            <h2>Why Choose Us?</h2>
+            <ul>
+                <li>Over <span class="highlight">a decade of expertise</span> in mineral manufacturing</li>
+                <li>High-quality <span class="highlight">Calcite Powder & Dolomite</span> tailored to industrial needs</li>
+                <li><span class="highlight">Customer-centric approach</span> with timely delivery and competitive pricing</li>
+                <li>Environmentally responsible and <span class="highlight">sustainable mining practices</span></li>
+            </ul>
+            
+            <h2 style="margin-top: 30px;">Our Vision</h2>
+            <p>To be a global leader in the mineral industry by consistently delivering <span class="highlight">high-quality products</span>, fostering innovation, and building long-term relationships with our customers.</p>
+            
+            <p style="margin-top: 20px; font-weight: 600;">With <span class="highlight">Fortius Minechem</span>, you get more than just minerals—you get a <span class="highlight">commitment to excellence and trust</span> that has been built over the years.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <!-- <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div> -->
+        <p>&copy; 2024 Fortius Minechem Pvt Ltd. All Rights Reserved.</p>
+        <p>Fortius Minechem Private Limited, Abu Highway, Gujarat - 385001, India</p>
+        <p>Contact: info@fortiusminechem.com | +91 9979230766</p>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const icon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            
+            // Save preference to localStorage
+            localStorage.setItem('theme', newTheme);
+        });
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+        
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.querySelector('i').className = 
+                navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Animate elements on load
+        function animateElements() {
+            const elements = [
+                { id: 'mainTitle', delay: 100 },
+                { id: 'card1', delay: 300 },
+                { id: 'card2', delay: 500 },
+                { id: 'founderImage', delay: 700 },
+                { id: 'founderInfo', delay: 900 },
+                { id: 'visionMission', delay: 1100 }
+            ];
+
+            elements.forEach(element => {
+                const el = document.getElementById(element.id);
+                setTimeout(() => {
+                    el.classList.add('animated');
+                }, element.delay);
+            });
+        }
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', animateElements);
+    </script>
+</body>
+</html>
