@@ -150,8 +150,30 @@
         /* Product Details */
         .product-details {
             padding: 80px 50px;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+        }
+
+        .product-section {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .product-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-divider {
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+            margin: 60px 0;
+            opacity: 0.3;
         }
 
         .product-header {
@@ -189,33 +211,91 @@
             transform: translateY(-3px);
         }
 
+        .product-header-info {
+            margin-bottom: 30px;
+        }
+
+        .product-header-info h2 {
+            color: var(--primary-color);
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .product-header-info p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
         .product-content {
             display: flex;
             gap: 50px;
-            margin-bottom: 60px;
+            margin-bottom: 30px;
         }
 
         .product-gallery {
-            flex: 1;
+            flex: 0 0 320px;
         }
 
         .main-image {
             width: 100%;
+            height: 280px;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            margin-bottom: 20px;
+            margin-bottom: 0;
         }
 
         .main-image img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
+            transition: var(--transition);
         }
 
+        .main-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .product-data {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 2px solid var(--primary-color);
+        }
+
+        .product-data h4 {
+            color: var(--primary-color);
+            font-size: 16px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .product-data ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .product-data li {
+            padding: 6px 0;
+            color: var(--text-color);
+            font-size: 14px;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(58, 134, 255, 0.1);
+        }
+
+        .product-data li:last-child {
+            border-bottom: none;
+        }
+
+
+
         .thumbnail-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            display: flex;
+            flex-direction: column;
             gap: 15px;
         }
 
@@ -244,29 +324,42 @@
             flex: 1;
         }
 
-        .specifications {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            margin-bottom: 30px;
+        .product-info h2,
+        .product-info > p {
+            display: none;
         }
 
-        .specifications h2 {
-            font-size: 28px;
+        .specifications {
+            background-color: var(--bg-color);
+            padding: 56px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            /* margin-bottom: 30px; */
+            border: 1px solid rgba(58, 134, 255, 0.1);
+        }
+
+        .specifications h3 {
+            font-size: 22px;
             color: var(--primary-color);
             margin-bottom: 25px;
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .specifications h2::after {
+        .specifications h3::before {
+            content: '\f0ae';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--secondary-color);
+        }
+
+        .specifications h3::after {
             content: '';
-            position: absolute;
-            width: 60px;
-            height: 3px;
-            background-color: var(--secondary-color);
-            bottom: -10px;
-            left: 0;
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
         }
 
         .spec-grid {
@@ -292,34 +385,68 @@
 
         .applications {
             margin-bottom: 30px;
+            background-color: var(--bg-color);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(131, 56, 236, 0.1);
         }
 
         .applications h3 {
-            font-size: 24px;
+            font-size: 20px;
             color: var(--primary-color);
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .applications h3::before {
+            content: '\f0b1';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--secondary-color);
+        }
+
+        .applications h3::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--secondary-color), transparent);
         }
 
         .applications ul {
             columns: 2;
             column-gap: 30px;
+            margin: 0;
+            padding: 0;
         }
 
         .applications li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             list-style-type: none;
             position: relative;
-            padding-left: 25px;
+            padding: 8px 0 8px 30px;
             break-inside: avoid;
+            background: linear-gradient(90deg, rgba(58, 134, 255, 0.05), transparent);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .applications li:hover {
+            background: linear-gradient(90deg, rgba(58, 134, 255, 0.1), transparent);
+            transform: translateX(5px);
         }
 
         .applications li::before {
-            content: '\f00c';
+            content: '\f0da';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             color: var(--secondary-color);
             position: absolute;
-            left: 0;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .product-cta {
@@ -342,6 +469,11 @@
             font-size: 16px;
         }
 
+        .product-cta {
+            display: block;
+            width: 100%;
+        }
+
         .btn-outline {
             background: transparent;
             border: 2px solid var(--primary-color);
@@ -358,6 +490,8 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
+
+
 
         .related-products {
             padding: 50px;
@@ -488,9 +622,47 @@
             transform: translateY(-5px);
         }
 
+        /* FORTIUS Text Section */
+        .fortius-text {
+            width: 100vw;
+            height: auto;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            position: relative;
+            margin-left: calc(-50vw + 50%);
+            background-color: var(--card-bg);
+        }
+
+        .fortius-letters {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 12rem;
+            font-weight: 900;
+            color: #2c3e50;
+            line-height: 1;
+            clip-path: inset(0 0 7% 0);
+            margin-bottom: -5%;
+        }
+
+        .fortius-letters span {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .fortius-letters span:hover {
+            transform: scale(1.1);
+        }
+
         @media (max-width: 1024px) {
             .product-content {
                 flex-direction: column;
+            }
+            
+            .product-gallery {
+                flex: none;
             }
             
             .spec-grid, .applications ul {
@@ -520,6 +692,15 @@
                 box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             }
 
+            .nav-links a {
+                color: var(--text-color) !important;
+                text-shadow: none;
+            }
+
+            .theme-toggle {
+                color: var(--text-color) !important;
+            }
+
             .nav-links.active {
                 left: 0;
             }
@@ -547,27 +728,83 @@
             }
         }
 
+        .mobile-product-header {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .product-header-info {
+                display: none;
+            }
+        }
+
         @media (max-width: 480px) {
-            .product-title h1 {
-                font-size: 32px;
+            .product-details {
+                padding: 20px;
+                margin-top: 80px;
             }
 
-            .product-cta {
+            .related-products {
+                padding: 20px;
+            }
+
+            .product-section {
+                padding: 20px;
+            }
+
+            .mobile-product-header {
+                display: block;
+                margin-bottom: 20px;
+            }
+
+            .mobile-product-header h2 {
+                color: var(--primary-color);
+                font-size: 24px;
+                margin-bottom: 0;
+            }
+
+            .product-info h2 {
+                display: none;
+            }
+
+            .product-info > p {
+                order: 1;
+                margin-top: 15px;
+            }
+
+            .product-content {
+                display: flex;
                 flex-direction: column;
             }
 
-            .btn {
-                width: 100%;
-                text-align: center;
+            .product-gallery {
+                order: -1;
             }
 
-            .product-details, .related-products {
-                padding: 40px 20px;
+            .specifications {
+                order: 2;
             }
-            
-            .related-item {
-                min-width: 250px;
+
+            .applications {
+                order: 3;
             }
+
+            .product-data {
+                display: none;
+            }
+
+            .product-title h1 {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+        .fortius-letters {
+          font-size: 5rem;
+          /* gap: 1rem; */
+        }
         }
     </style>
 </head>
@@ -597,94 +834,216 @@
     <main class="product-details">
         <div class="product-header">
             <div class="product-title">
-                <h1 id="product-title">Calcite Powder</h1>
-                <p id="product-description">Our premium quality calcite powder, enhanced with fine silica additives, delivers exceptional brightness and consistent particle size distribution for superior performance in demanding industrial applications.</p>
+                <h1>Our Products</h1>
+                <p>Comprehensive range of high-quality mineral powders for diverse industrial applications</p>
             </div>
             <a href="index.html#products" class="back-btn">
-                <i class="fas fa-arrow-left"></i> Back to Products
+                <i class="fas fa-arrow-left"></i> Back to Home
             </a>
         </div>
 
-        <div class="product-content">
-            <div class="product-gallery">
-                <div class="main-image">
-                    <img id="main-image" src="./IMG/PC1.jpg" alt="Calcite Powder">
-                </div>
-                <div class="thumbnail-container">
-                    <div class="thumbnail" onclick="changeImage('./IMG/PC1.jpg', 'Calcite Powder')">
+        <!-- Calcite Powder -->
+        <div class="product-section">
+            <div class="mobile-product-header">
+                <h2>Calcite Powder</h2>
+            </div>
+            <div class="product-header-info">
+                <h2>Calcite Powder</h2>
+                <p>Premium quality calcite powder with exceptional brightness and consistent particle size distribution for industrial applications.</p>
+            </div>
+            <div class="product-content">
+                <div class="product-gallery">
+                    <div class="main-image">
                         <img src="./IMG/PC1.jpg" alt="Calcite Powder">
                     </div>
-                    <div class="thumbnail" onclick="changeImage('./IMG/PC4.jpg', 'Calcite Powder Closeup')">
-                        <img src="./IMG/PC4.jpg" alt="Calcite Powder Closeup">
+                    <div class="product-data">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li>Brightness: 95-98% ISO</li>
+                            <li>Mesh Size: 100-500</li>
+                            <li>Purity: >98.5% CaCO3</li>
+                            <li>Low Moisture: <0.5%</li>
+                        </ul>
                     </div>
-                    <div class="thumbnail" onclick="changeImage('./IMG/PC3.jpg', 'Calcite Powder Packaging')">
-                        <img src="./IMG/PC3.jpg" alt="Calcite Powder Packaging">
-                    </div>
-                    <div class="thumbnail" onclick="changeImage('./IMG/PC2.jpg', 'Calcite Powder Application')">
-                        <img src="./IMG/PC2.jpg" alt="Calcite Powder Application">
+                </div>
+                <div class="product-info">
+                    <h2 style="color: var(--primary-color); margin-bottom: 15px; font-size: 32px;">Calcite Powder</h2>
+                    <p style="margin-bottom: 30px; font-size: 16px; line-height: 1.6;">Premium quality calcite powder with exceptional brightness and consistent particle size distribution for industrial applications.</p>
+                    <div class="specifications">
+                        <h3>Technical Specifications</h3>
+                        <div class="spec-grid">
+                            <div class="spec-item"><h4>Brightness</h4><p>95-98% (ISO standard)</p></div>
+                            <div class="spec-item"><h4>Particle Size</h4><p>100-500 Mesh</p></div>
+                            <div class="spec-item"><h4>CaCO3 Content</h4><p>>98.5% purity</p></div>
+                            <div class="spec-item"><h4>Moisture Content</h4><p><0.5%</p></div>
+                            <div class="spec-item"><h4>Oil Absorption</h4><p>12-18 g/100g</p></div>
+                            <div class="spec-item"><h4>pH Value</h4><p>9-10 (neutral)</p></div>
+                            <div class="spec-item"><h4>Specific Gravity</h4><p>2.7 g/cm³</p></div>
+                            <div class="spec-item"><h4>Refractive Index</h4><p>1.6</p></div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="product-info">
-                <div class="specifications">
-                    <h2>Technical Specifications</h2>
-                    <div class="spec-grid" id="specifications">
-                        <!-- Filled by JavaScript -->
-                    </div>
-                </div>
-
-                <div class="applications">
-                    <h3>Industrial Applications</h3>
-                    <ul id="applications">
-                        <!-- Filled by JavaScript -->
-                    </ul>
-                </div>
-
-                <div class="product-cta">
-                    <a href="contact.html" class="btn">
-                        <i class="fas fa-envelope"></i> Contact Us
-                    </a>
-                </div>
+            <div class="applications">
+                <h3>Industrial Applications</h3>
+                <ul>
+                    <li>Paints & Coatings</li>
+                    <li>Plastics & Polymers</li>
+                    <li>Rubber Industry</li>
+                    <li>Paper Industry</li>
+                    <li>Construction Materials</li>
+                    <li>Adhesives & Sealants</li>
+                    <li>Ceramics & tiles</li>
+                    <li>Pharmaceuticals</li>
+                </ul>
             </div>
         </div>
 
-        <div class="related-products">
-            <h2 class="section-title">Related Products</h2>
-            <div class="related-slider">
-                <div class="related-item">
-                    <img src="./IMG/PC1.jpg" alt="calcite-powder">
-                    <div class="related-content">
-                        <h3>Calcite Powder</h3>
-                        <p>High-grade Calcite Powder for various industrial applications and further processing.</p>
-                        <a href="product-details.html?product=calcite-powder">View Details</a>
+        <div class="product-divider"></div>
+
+        <!-- Dolomite Powder -->
+        <div class="product-section">
+            <div class="mobile-product-header">
+                <h2>Dolomite Powder</h2>
+            </div>
+            <div class="product-header-info">
+                <h2>Dolomite Powder</h2>
+                <p>High-purity dolomite powder with optimal magnesium content for steel manufacturing and glass production applications.</p>
+            </div>
+            <div class="product-content">
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="./IMG/PD1.jpg" alt="Dolomite Powder">
+                    </div>
+                    <div class="product-data">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li>MgO: 18-22%</li>
+                            <li>CaO: 28-32%</li>
+                            <li>SiO2: <1.5%</li>
+                            <li>Brightness: >95%</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="related-item">
-                    <img src="./IMG/PD1.jpg" alt="Dolomite Powder">
-                    <div class="related-content">
-                        <h3>Dolomite Powder</h3>
-                        <p>High-purity dolomite with optimal magnesium content for steel manufacturing and glass production.</p>
-                        <a href="product-details.html?product=dolomite-powder">View Details</a>
-                    </div>
-                </div>
-                <div class="related-item">
-                    <img src="./IMG/PM1.jpg" alt="Micronized Calcite">
-                    <div class="related-content">
-                        <h3>Micronized Calcite</h3>
-                        <p>Ultra-fine calcite with high surface area for premium applications in paints and plastics.</p>
-                        <a href="product-details.html?product=micronized-calcite">View Details</a>
+                <div class="product-info">
+                    <h2 style="color: var(--primary-color); margin-bottom: 15px; font-size: 32px;">Dolomite Powder</h2>
+                    <p style="margin-bottom: 30px; font-size: 16px; line-height: 1.6;">High-purity dolomite powder with optimal magnesium content for steel manufacturing and glass production applications.</p>
+                    <div class="specifications">
+                        <h3>Technical Specifications</h3>
+                        <div class="spec-grid">
+                            <div class="spec-item"><h4>MgO Content</h4><p>18-22%</p></div>
+                            <div class="spec-item"><h4>CaO Content</h4><p>28-32%</p></div>
+                            <div class="spec-item"><h4>SiO2 Content</h4><p><1.5%</p></div>
+                            <div class="spec-item"><h4>Particle Size</h4><p>10-500 microns (customizable)</p></div>
+                            <div class="spec-item"><h4>LOI (Loss on Ignition)</h4><p>44-47%</p></div>
+                            <div class="spec-item"><h4>Brightness</h4><p>>95%</p></div>
+                            <div class="spec-item"><h4>Bulk Density</h4><p>1.2-1.6 g/cm³</p></div>
+                            <div class="spec-item"><h4>Hardness</h4><p>3.5-4 Mohs scale</p></div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="applications">
+                <h3>Industrial Applications</h3>
+                <ul>
+                    <li>Steel Manufacturing</li>
+                    <li>Glass Production</li>
+                    <li>Construction Materials</li>
+                    <li>Ceramics</li>
+                    <li>Agriculture</li>
+                    <li>Water Treatment</li>
+                    <li>Add in Calcium</li>
+                    <li>Flue Gas Desulfurization</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="product-divider"></div>
+
+        <!-- Micronized Calcite -->
+        <div class="product-section">
+            <div class="mobile-product-header">
+                <h2>Micronized Calcite</h2>
+            </div>
+            <div class="product-header-info">
+                <h2>Micronized Calcite</h2>
+                <p>Ultra-fine calcite powder with high surface area for premium applications in paints, plastics, and pharmaceuticals.</p>
+            </div>
+            <div class="product-content">
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="./IMG/PM1.jpg" alt="Micronized Calcite">
+                    </div>
+                    <div class="product-data">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li>Size: 2-20 microns</li>
+                            <li>Surface: 1.5-3.5 m²/g</li>
+                            <li>Purity: >99% CaCO3</li>
+                            <li>Brightness: 96-98%</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h2 style="color: var(--primary-color); margin-bottom: 15px; font-size: 32px;">Micronized Calcite</h2>
+                    <p style="margin-bottom: 30px; font-size: 16px; line-height: 1.6;">Ultra-fine calcite powder with high surface area for premium applications in paints, plastics, and pharmaceuticals.</p>
+                    <div class="specifications">
+                        <h3>Technical Specifications</h3>
+                        <div class="spec-grid">
+                            <div class="spec-item"><h4>Particle Size</h4><p>2-20 microns (D50)</p></div>
+                            <div class="spec-item"><h4>Surface Area</h4><p>1.5-3.5 m²/g (BET)</p></div>
+                            <div class="spec-item"><h4>Brightness</h4><p>96-98%</p></div>
+                            <div class="spec-item"><h4>Oil Absorption</h4><p>14-20 g/100g</p></div>
+                            <div class="spec-item"><h4>CaCO3 Content</h4><p>>99% purity</p></div>
+                            <div class="spec-item"><h4>Moisture Content</h4><p><0.3%</p></div>
+                            <div class="spec-item"><h4>Specific Gravity</h4><p>2.7 g/cm³</p></div>
+                            <div class="spec-item"><h4>Refractive Index</h4><p>1.6</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="applications">
+                <h3>Industrial Applications</h3>
+                <ul>
+                    <li>Premium Paints</li>
+                    <li>High-end Plastics</li>
+                    <li>Pharmaceuticals</li>
+                    <li>Cosmetics</li>
+                    <li>Food Additives</li>
+                    <li>Sealants</li>
+                    <li>Inks</li>
+                    <li>Specialty Coatings</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="product-cta" style="text-align: center; margin: 60px auto; width: 100%;">
+            <a href="contact.html" class="btn">
+                <i class="fas fa-envelope"></i> Contact Us for All Products
+            </a>
         </div>
     </main>
 
+
+
     <footer class="footer">
-        <p>&copy; 2024 Fortius Minechem Pvt Ltd. All Rights Reserved.</p>
+        <p>&copy; 2025 Fortius Minechem Pvt Ltd. All Rights Reserved.</p>
         <p>Fortius Minechem Private Limited, Abu Highway, Gujarat - 385001, India</p>
         <p>Contact: info@fortiusminechem.com | +91 9979230766</p>
     </footer>
+
+    <!-- FORTIUS Text Section -->
+    <div class="fortius-text">
+        <div class="fortius-letters">
+            <span>F</span>
+            <span>O</span>
+            <span>R</span>
+            <span>T</span>
+            <span>I</span>
+            <span>U</span>
+            <span>S</span>
+        </div>
+    </div>
 
     <script>
         // Theme Toggle
@@ -725,134 +1084,7 @@
             navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Product details functionality
-        function changeImage(src, alt) {
-            document.getElementById('main-image').src = src;
-            document.getElementById('main-image').alt = alt;
-        }
 
-        // Product data
-        const products = {
-            'calcite-powder': {
-                title: 'Calcite Powder',
-                description: 'Premium quality calcite powder with exceptional brightness and consistent particle size distribution for industrial applications.',
-                specs: [
-                    { name: 'Brightness', value: '95-98% (ISO standard)' },
-                    { name: 'Particle Size', value: '100-500 Mesh' },
-                    { name: 'CaCO3 Content', value: '>98.5% purity' },
-                    { name: 'Moisture Content', value: '<0.5%' },
-                    { name: 'Oil Absorption', value: '12-18 g/100g' },
-                    { name: 'pH Value', value: '9-10 (neutral)' },
-                    { name: 'Specific Gravity', value: '2.7 g/cm³' },
-                    { name: 'Refractive Index', value: '1.6' }
-                ],
-                applications: [
-                    'Paints & Coatings',
-                    'Plastics & Polymers',
-                    'Rubber Industry',
-                    'Paper Industry',
-                    'Construction Materials',
-                    'Adhesives & Sealants',
-                    'Ceramics & tiles' ,
-                    'Pharmaceuticals'
-                ],
-                mainImage: './IMG/PC1.jpg'
-            },
-            'dolomite-powder': {
-                title: 'Dolomite Powder',
-                description: 'High-purity dolomite powder with optimal magnesium content for steel manufacturing and glass production applications.',
-                specs: [
-                    { name: 'MgO Content', value: '18-22%' },
-                    { name: 'CaO Content', value: '28-32%' },
-                    { name: 'SiO2 Content', value: '<1.5%' },
-                    { name: 'Particle Size', value: '10-500 microns (customizable)' },
-                    { name: 'LOI (Loss on Ignition)', value: '44-47%' },
-                    { name: 'Brightness', value: '>95%' },
-                    { name: 'Bulk Density', value: '1.2-1.6 g/cm³' },
-                    { name: 'Hardness', value: '3.5-4 Mohs scale' }
-                ],
-                applications: [
-                    'Steel Manufacturing',
-                    'Glass Production',
-                    'Construction Materials',
-                    'Ceramics',
-                    'Agriculture',
-                    'Water Treatment',
-                    'Add in Calcium',
-                    'Flue Gas Desulfurization'
-                ],
-                mainImage: './IMG/PD1.jpg'
-            },
-            'micronized-calcite': {
-                title: 'Micronized Calcite',
-                description: 'Ultra-fine calcite powder with high surface area for premium applications in paints, plastics, and pharmaceuticals.',
-                specs: [
-                    { name: 'Particle Size', value: '2-20 microns (D50)' },
-                    { name: 'Surface Area', value: '1.5-3.5 m²/g (BET)' },
-                    { name: 'Brightness', value: '96-98%' },
-                    { name: 'Oil Absorption', value: '14-20 g/100g' },
-                    { name: 'CaCO3 Content', value: '>99% purity' },
-                    { name: 'Moisture Content', value: '<0.3%' },
-                    { name: 'Specific Gravity', value: '2.7 g/cm³' },
-                    { name: 'Refractive Index', value: '1.6' }
-                ],
-                applications: [
-                    'Premium Paints',
-                    'High-end Plastics',
-                    'Pharmaceuticals',
-                    'Cosmetics',
-                    'Food Additives',
-                    'Sealants',
-                    'Inks',
-                    'Specialty Coatings'
-                ],
-                mainImage: './IMG/PM1.jpg'
-            }
-        };
-
-        // Load product data based on URL parameter
-        function loadProductData() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = urlParams.get('product');
-            
-            if (productId && products[productId]) {
-                const product = products[productId];
-                
-                // Set basic info
-                document.getElementById('product-title').textContent = product.title;
-                document.getElementById('product-description').textContent = product.description;
-                document.getElementById('main-image').src = product.mainImage;
-                document.getElementById('main-image').alt = product.title;
-                
-                // Set specifications
-                const specContainer = document.getElementById('specifications');
-                specContainer.innerHTML = '';
-                product.specs.forEach(spec => {
-                    const specItem = document.createElement('div');
-                    specItem.className = 'spec-item';
-                    specItem.innerHTML = `
-                        <h4>${spec.name}</h4>
-                        <p>${spec.value}</p>
-                    `;
-                    specContainer.appendChild(specItem);
-                });
-                
-                // Set applications
-                const applicationsContainer = document.getElementById('applications');
-                applicationsContainer.innerHTML = '';
-                product.applications.forEach(app => {
-                    const li = document.createElement('li');
-                    li.textContent = app;
-                    applicationsContainer.appendChild(li);
-                });
-            } else {
-                // Default to calcite powder if no valid product ID
-                window.location.href = 'product-details.html?product=calcite-powder';
-            }
-        }
-
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', loadProductData);
     </script>
 </body>
 </html>
